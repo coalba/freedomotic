@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (c) 2009-2015 Freedomotic team http://freedomotic.com
+ * Copyright (c) 2009-2016 Freedomotic team http://freedomotic.com
  *
  * This file is part of Freedomotic
  *
@@ -32,6 +32,7 @@ public class InjectorAutomations extends AbstractModule {
     protected void configure() {
         bind(CommandRepository.class).to(CommandRepositoryImpl.class).in(Singleton.class);
         bind(TriggerRepository.class).to(TriggerRepositoryImpl.class).in(Singleton.class);
+        bind(ReactionRepository.class).to(ReactionRepositoryImpl.class).in(Singleton.class);
     }
 
 }

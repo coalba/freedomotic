@@ -1,6 +1,6 @@
 /**
  *
- * Copyright (c) 2009-2015 Freedomotic team http://freedomotic.com
+ * Copyright (c) 2009-2016 Freedomotic team http://freedomotic.com
  *
  * This file is part of Freedomotic
  *
@@ -40,9 +40,9 @@ class BusBroker extends LifeCycle {
     private void configureBroker() throws Exception {
 
         // websocket connector for javascript apps
-        broker.addConnector(Info.MESSAGING.BROKER_STOMP);
+        // broker.addConnector(Info.MESSAGING.BROKER_STOMP);
         // websocket connector for javascript apps
-        broker.addConnector(Info.MESSAGING.BROKER_WEBSOCKET);
+        // broker.addConnector(Info.MESSAGING.BROKER_WEBSOCKET);
 
         // broker setup
         broker.setPersistent(false); // do not save messages on disk
