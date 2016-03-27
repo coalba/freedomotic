@@ -24,10 +24,11 @@ import com.freedomotic.model.object.EnvObject;
 
 /**
  * This class is reserver for internal use, Never use it outside the core!
- * @author enrico
+ *
+ * @author Enrico Nicoletti
  */
 public class SynchThingRequest extends EventTemplate {
-    
+
     private final EnvObject thing;
 
     public SynchThingRequest(SynchAction action, EnvObject thing) {

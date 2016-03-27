@@ -28,7 +28,7 @@ import org.apache.shiro.subject.Subject;
 
 /**
  *
- * @author Matteo Mazzoni <matteo@bestmazzo.it>
+ * @author Matteo Mazzoni
  */
 public interface Auth {
 
@@ -130,10 +130,10 @@ public interface Auth {
     public boolean addRole(SimpleRole role);
 
     public User getCurrentUser();
-    
+
     @RequiresPermissions("auth:users:read")
     public User getUser(String username);
-    
+
     @RequiresPermissions("auth:users:read")
     public Map<String, User> getUsers();
 
@@ -142,12 +142,12 @@ public interface Auth {
 
     @RequiresPermissions("auth:roles:read")
     public Map<String, SimpleRole> getRoles();
-    
+
     @RequiresPermissions("auth:users:delete")
     public boolean deleteUser(String userName);
-    
+
     @RequiresPermissions("auth:roles:delete")
     public boolean deleteRole(String roleName);
-    
+
     public Realm getUserRealm();
 }

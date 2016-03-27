@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  *
- * @author matteo
+ * @author Matteo Mazzoni
  * @param <T>
  */
 public interface Repository<T> {
@@ -42,14 +42,13 @@ public interface Repository<T> {
     public boolean delete(String uuid);
 
     public T modify(String uuid, T data);
-    
+
     public T copy(T data);
-    
+
     public void deleteAll();
-    
+
     //TODO: public long count();
     //TODO: public boolean exists(String uuid);
     //TODO: public void flush();
     //TODO: T saveAndFlush(T arg0)
-
 }

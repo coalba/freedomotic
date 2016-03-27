@@ -23,15 +23,16 @@ import com.freedomotic.api.EventTemplate;
 import com.freedomotic.environment.ZoneLogic;
 import com.freedomotic.model.environment.Zone;
 import com.freedomotic.things.GenericPerson;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author nicoletti
+ * @author Enrico Nicoletti
  */
 public final class PersonEntersZone extends EventTemplate {
 
-    private static final Logger LOG = Logger.getLogger(PersonEntersZone.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(PersonEntersZone.class.getName());
     private final String uuid;
     private final String zoneName;
 
@@ -59,7 +60,7 @@ public final class PersonEntersZone extends EventTemplate {
     public String getZoneName() {
         return zoneName;
     }
-    
+
     /**
      *
      * @return

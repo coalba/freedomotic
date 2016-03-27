@@ -25,13 +25,11 @@ import java.util.List;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public interface ReactionRepository extends Repository<Reaction> {
 
-   
     //TODO: remove it, here just for refactoring
-
     public void loadReactions(File folder);
 
     public void saveReactions(File folder);

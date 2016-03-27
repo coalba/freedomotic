@@ -21,7 +21,7 @@ package com.freedomotic.rules;
 
 /**
  *
- * @author nicoletti
+ * @author Enrico Nicoletti
  * @param <T>
  */
 public class ExpressionFactory<T extends Expression> {

@@ -31,7 +31,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Matteo Mazzoni <matteo@bestmazzo.it>
+ * @author Matteo Mazzoni
  */
 @Entity(name = "harvester")
 @NamedQueries({
@@ -193,6 +193,5 @@ public class UsageData implements Cloneable {
     public void setUuid(String val) {
         this.uuid = val;
     }
-
 
 }

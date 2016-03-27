@@ -26,7 +26,7 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public class InjectorEnvironment extends AbstractModule {
 

@@ -30,17 +30,17 @@ import java.net.URLDecoder;
 import java.net.UnknownHostException;
 import java.util.StringTokenizer;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author nicoletti
+ * @author Enrico Nicoletti
  */
 @XmlRootElement
 public class Info {
 
-    private static final Logger LOG = Logger.getLogger(Info.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(Info.class.getName());
     public static FrameworkSettings FRAMEWORK = new FrameworkSettings();
     public static PathSettings PATHS = new PathSettings();
     public static MessagingSettings MESSAGING = new MessagingSettings();
@@ -72,7 +72,7 @@ public class Info {
         public File PATH_DATA_FOLDER = new File(PATH_WORKDIR + "/data/");
         public File PATH_RESOURCES_FOLDER = new File(PATH_DATA_FOLDER + "/resources/");
         public File PATH_ENVIRONMENTS_FOLDER = new File(PATH_DATA_FOLDER + "/furn/");
-        
+
         public final File PATH_PLUGINS_FOLDER = new File(PATH_WORKDIR + "/plugins/");
         public final File PATH_DEVICES_FOLDER = new File(PATH_PLUGINS_FOLDER + "/devices/");
         public final File PATH_OBJECTS_FOLDER = new File(PATH_PLUGINS_FOLDER + "/objects/");
@@ -96,7 +96,7 @@ public class Info {
         public final String BROKER_DEFAULT_PROTOCOL = "peer";
         public final String BROKER_DEFAULT_CLUSTER_NAME = "freedomotic";
         public final String BROKER_DEFAULT_UUID = UUID.randomUUID().toString();
-        
+
         public final int BROKER_PORT = 61616;
 
         //port zero mean the first available port
@@ -120,10 +120,8 @@ public class Info {
             address = InetAddress.getLocalHost().toString();
 
         } catch (UnknownHostException ex) {
-            Logger.getLogger(Info.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            LOG.error(ex.getMessage());
         }
-
         return address;
 
     }
@@ -157,10 +155,10 @@ public class Info {
             LOG.info(workdir.getAbsolutePath());
             return workdir;
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Info.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error(ex.getMessage());
         }
 
-        LOG.severe("Something went wrong when figuring out which is the current workdir. "
+        LOG.error("Something went wrong when figuring out which is the current workdir. "
                 + "Cannot start freedmotic as a consequence");
         return null;
     }
@@ -176,7 +174,7 @@ public class Info {
         Info.PATHS.PATH_RESOURCES_FOLDER = new File(path + "/resources/");
         Info.PATHS.PATH_ENVIRONMENTS_FOLDER = new File(path + "/furn/");
     }
-    
+
     public static void relocateWorkdir(File file) {
         Info.PATHS.PATH_WORKDIR = file;
     }

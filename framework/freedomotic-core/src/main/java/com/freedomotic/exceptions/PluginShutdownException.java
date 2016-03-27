@@ -21,14 +21,13 @@ package com.freedomotic.exceptions;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public class PluginShutdownException extends Exception {
-    
+
     public PluginShutdownException(String msg) {
         super(msg);
     }
-
 
     public PluginShutdownException(String message, Throwable cause) {
         super(message, cause);

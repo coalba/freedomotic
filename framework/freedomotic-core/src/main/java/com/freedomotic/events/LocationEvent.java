@@ -1,7 +1,6 @@
 /**
  *
- * Copyright (c) 2009-2016 Freedomotic team
- * http://freedomotic.com
+ * Copyright (c) 2009-2016 Freedomotic team http://freedomotic.com
  *
  * This file is part of Freedomotic
  *
@@ -22,18 +21,19 @@ package com.freedomotic.events;
 
 import com.freedomotic.api.EventTemplate;
 import com.freedomotic.model.geometry.FreedomPoint;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A person is detected in a position with coordinates x,y of the environment.
- * This event is thrown on the first time a person is detected, after a
- * detection, if the person moves, a {@link PersonMoving} event is thrown.
+ * This event is thrown the first time a person is detected, after a detection,
+ * if the person moves, a {@link PersonMoving} event is thrown.
  *
- * @author Enrico
+ * @author Enrico Nicoletti
  */
 public final class LocationEvent extends EventTemplate {
 
-    private static final Logger LOG = Logger.getLogger(LocationEvent.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(LocationEvent.class.getName());
     private final String uuid;
     private final int x;
     private final int y;
@@ -41,9 +41,9 @@ public final class LocationEvent extends EventTemplate {
 
     /**
      *
-     * @param source
-     * @param uuid
-     * @param location
+     * @param source the object source
+     * @param uuid the object uuid
+     * @param location the object location
      */
     public LocationEvent(Object source, String uuid, FreedomPoint location) {
         this.uuid = uuid;
@@ -53,9 +53,8 @@ public final class LocationEvent extends EventTemplate {
         generateEventPayload();
     }
 
-    
     /**
-     *
+     * Generates the event payload.
      */
     @Override
     protected void generateEventPayload() {
@@ -67,32 +66,36 @@ public final class LocationEvent extends EventTemplate {
     }
 
     /**
+     * Gets the object uuid.
      *
-     * @return
+     * @return the object uuid
      */
     public String getUuid() {
         return uuid;
     }
 
     /**
+     * Gets the X coordinate of the location.
      *
-     * @return
+     * @return the X coordinate
      */
     public int getX() {
         return x;
     }
 
     /**
+     * Gets the Y coordinate of the location.
      *
-     * @return
+     * @return the Y coordinate
      */
     public int getY() {
         return y;
     }
-    
-        /**
+
+   /**
+     * Gets the Z coordinate of the location.
      *
-     * @return
+     * @return the Z coordinate
      */
     public int getZ() {
         return z;
@@ -108,8 +111,9 @@ public final class LocationEvent extends EventTemplate {
     }
 
     /**
+     * Gets the default channel.
      *
-     * @return
+     * @return the default channel 'app.event.sensor.person.movement.detected'
      */
     @Override
     public String getDefaultDestination() {

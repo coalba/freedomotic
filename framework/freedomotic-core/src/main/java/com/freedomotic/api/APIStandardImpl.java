@@ -1,6 +1,7 @@
 /**
  *
- * Copyright (c) 2009-2016 Freedomotic team http://freedomotic.com
+ * Copyright (c) 2009-2016 Freedomotic team
+ * http://freedomotic.com
  *
  * This file is part of Freedomotic
  *
@@ -38,13 +39,13 @@ import java.awt.image.BufferedImage;
 import java.util.Collection;
 
 /**
- * Implements the standard freedomotic APIs available to plugins. This class
+ * Implements the standard Freedomotic APIs available to plugins. This class
  * returns only unmodifiable collections, so the returned collections are just a
  * read-only view of current underlying data. This data are not immutable
- * themselves, but they are immutable trough the references retrieved from the
+ * themselves, but they are immutable through the references retrieved from the
  * methods of this class.
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 class APIStandardImpl implements API {
 

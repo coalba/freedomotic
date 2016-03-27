@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public interface CommandRepository extends Repository<Command> {
 
@@ -34,7 +34,6 @@ public interface CommandRepository extends Repository<Command> {
     public List<Command> findUserCommands();
 
     //TODO: remove it, here just for refactoring
-
     public void loadCommands(File folder);
 
     public void saveCommands(File folder);

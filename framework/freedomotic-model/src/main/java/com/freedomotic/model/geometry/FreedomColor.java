@@ -25,7 +25,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Enrico
+ * @author Enrico Nicoletti
  */
 public class FreedomColor implements Serializable{
     

@@ -21,7 +21,7 @@ package com.freedomotic.rules;
 
 /**
  *
- * @author nicoletti
+ * @author Enrico Nicoletti
  */
 public class Equals extends BinaryExpression {
 
@@ -42,7 +42,7 @@ public class Equals extends BinaryExpression {
      */
     @Override
     public Boolean evaluate() {
-        if (getLeft().equalsIgnoreCase(getRight()) 
+        if (getLeft().equalsIgnoreCase(getRight())
                 || (getRight().equals(Statement.ANY))) {
             return true;
         }

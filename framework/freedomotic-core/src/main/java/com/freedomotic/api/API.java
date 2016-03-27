@@ -1,6 +1,7 @@
 /**
  *
- * Copyright (c) 2009-2016 Freedomotic team http://freedomotic.com
+ * Copyright (c) 2009-2016 Freedomotic team
+ * http://freedomotic.com
  *
  * This file is part of Freedomotic
  *
@@ -37,7 +38,7 @@ import java.util.Collection;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public interface API {
     //Configuration APi
@@ -46,7 +47,6 @@ public interface API {
      *
      * @return
      */
-    
     AppConfig getConfig();
 
     /**
@@ -54,7 +54,7 @@ public interface API {
      * @return
      */
     Auth getAuth();
-    
+
     /**
      *
      * @return
@@ -68,7 +68,6 @@ public interface API {
     ClientStorage getClientStorage();
     //read
 
-
     /**
      *
      * @return
@@ -81,13 +80,13 @@ public interface API {
      * @return
      */
     Collection<Client> getClients(String filter);
-    
+
     /**
      *
      * @return
      */
     PluginsManager getPluginManager();
-    
+
     //Resources API
     /**
      *
@@ -95,15 +94,20 @@ public interface API {
      * @return
      */
     BufferedImage getResource(String resourceIdentifier);
-    
+
     EnvironmentRepository environments();
+
     TriggerRepository triggers();
+
     ThingRepository things();
+
     CommandRepository commands();
+
     ReactionRepository reactions();
+
     NlpCommand nlpCommands();
-    
+
     ThingFactory thingsFactory();
-    
+
     BusService bus();
 }

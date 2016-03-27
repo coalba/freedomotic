@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Enrico
+ * @author Enrico Nicoletti
  */
 public class ReactionRepositoryImpl implements ReactionRepository {
 
@@ -106,11 +106,11 @@ public class ReactionRepositoryImpl implements ReactionRepository {
         // This filter only returns object files
         FileFilter objectFileFileter
                 = new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isFile() && file.getName().endsWith(".xrea");
-            }
-        };
+                    @Override
+                    public boolean accept(File file) {
+                        return file.isFile() && file.getName().endsWith(".xrea");
+                    }
+                };
 
         files = folder.listFiles(objectFileFileter);
 
@@ -129,14 +129,14 @@ public class ReactionRepositoryImpl implements ReactionRepository {
         // This filter only returns object files
         FileFilter objectFileFileter
                 = new FileFilter() {
-            public boolean accept(File file) {
-                if (file.isFile() && file.getName().endsWith(".xrea")) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        };
+                    public boolean accept(File file) {
+                        if (file.isFile() && file.getName().endsWith(".xrea")) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                };
 
         File[] files = folder.listFiles(objectFileFileter);
 

@@ -29,8 +29,8 @@ import com.freedomotic.exceptions.UnableToExecuteException;
 import com.freedomotic.exceptions.VariableResolutionException;
 import com.freedomotic.reactions.Command;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 
 /**
@@ -51,11 +51,11 @@ import javax.inject.Inject;
  * for more info.
  *
  * @see BusService#send(com.freedomotic.reactions.Command)
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public class CommandsNlpService extends AbstractConsumer {
 
-    private static final Logger LOG = Logger.getLogger(CommandsNlpService.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(CommandsNlpService.class.getName());
     private static final String MESSAGING_CHANNEL = "app.commands.interpreter.nlp";
     // Messaging related parameters
     public static final String PARAM_NLP_TEXT = "text";
@@ -84,7 +84,7 @@ public class CommandsNlpService extends AbstractConsumer {
                 mostSimilar = resolver.resolve(mostSimilar);
                 mostSimilar.setReplyTimeout(-1);
             } catch (CloneNotSupportedException | VariableResolutionException ex) {
-                Logger.getLogger(CommandsNlpService.class.getName()).log(Level.SEVERE, null, ex);
+                LOG.error(ex.getMessage());
             }
             // Schedule the command for execution
             getBusService().send(mostSimilar);
@@ -119,7 +119,7 @@ public class CommandsNlpService extends AbstractConsumer {
 
     @Override
     public void onEvent(EventTemplate eventTemplate) {
-        throw new UnsupportedOperationException("This modules doesen't handle events");
+        throw new UnsupportedOperationException("This modules doesn't handle events");
     }
 
     @Override

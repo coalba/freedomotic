@@ -21,7 +21,7 @@ package com.freedomotic.rules;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public class Not extends UnaryExpression<Boolean> {
 

@@ -47,7 +47,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 @XmlRootElement
 public final class Reaction

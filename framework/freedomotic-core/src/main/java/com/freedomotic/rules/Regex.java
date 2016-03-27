@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author nicoletti
+ * @author Enrico Nicoletti
  */
 public class Regex extends BinaryExpression {
 

@@ -21,12 +21,13 @@ package com.freedomotic.rules;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  * @param <E>
  */
 public abstract class UnaryExpression<E> implements Expression {
+
     private E argument;
-    
+
     public UnaryExpression(E argument) {
         this.argument = argument;
     }
@@ -38,5 +39,5 @@ public abstract class UnaryExpression<E> implements Expression {
     public void setArgument(E argument) {
         this.argument = argument;
     }
-    
+
 }

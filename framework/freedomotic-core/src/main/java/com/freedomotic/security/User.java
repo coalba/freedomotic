@@ -22,8 +22,8 @@ package com.freedomotic.security;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.shiro.authc.SimpleAccount;
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleRole;
@@ -31,11 +31,11 @@ import org.apache.shiro.authz.permission.WildcardPermission;
 
 /**
  *
- * @author matteo
+ * @author Matteo Mazzoni
  */
 public final class User extends SimpleAccount {
 
-    private static final Logger LOG = Logger.getLogger(User.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(User.class.getName());
 
     private final Properties properties = new Properties();
 
@@ -94,9 +94,9 @@ public final class User extends SimpleAccount {
         if (role != null) {
             super.addRole(role.getName());
             addObjectPermissions(role.getPermissions());
-            LOG.log(Level.INFO, "Adding role {0} to user {1}: {2}", new Object[]{role.getName(), getName(), role.getPermissions()});
+            LOG.info("Adding role {} to user {}: {}", new Object[]{role.getName(), getName(), role.getPermissions()});
         } else {
-            LOG.log(Level.SEVERE, "Cannot find role: {0}", roleName);
+            LOG.error("Cannot find role: {}", roleName);
         }
     }
 

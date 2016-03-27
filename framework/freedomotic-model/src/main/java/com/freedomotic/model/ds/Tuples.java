@@ -17,10 +17,6 @@
  * Freedomotic; see the file COPYING. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.freedomotic.model.ds;
 
 import java.io.Serializable;
@@ -38,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * used for instance in plugin configuration file to define plugin level
  * variables
  *
- * @author Enrico
+ * @author Enrico Nicoletti
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -46,7 +42,6 @@ public class Tuples
         implements Serializable {
 
     private static final long serialVersionUID = 3113993714552615957L;
-
     private final ArrayList<HashMap<String, String>> tuples = new ArrayList<HashMap<String, String>>();
 
     /**
@@ -208,5 +203,4 @@ public class Tuples
     public boolean remove(int i) {
         return (tuples.remove(i) != null);
     }
-
 }

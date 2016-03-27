@@ -42,23 +42,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Create Things on the fly using a template as a starting point. It can be
  * created from a Command or by calling the
  * {@link #join(String clazz, String name, String protocol, String address, boolean allowClones)}
  * method. This module spawns a new instance overriding template properties like
- * name, protocol and address. Moreover it can load the hardware trigger and
- * commands mapping from the tuples defined plugin manifest
+ * name, protocol and address. Moreover it can load the hardware triggers and
+ * commands mapping from the tuples defined in the plugin manifest.
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public final class Autodiscovery extends AbstractConsumer {
 
     private static final String MESSAGING_CHANNEL = "app.objects.create";
-    private static final Logger LOG = Logger.getLogger(Autodiscovery.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(Autodiscovery.class.getName());
 
     // Dependencies
     private final ClientStorage clientStorage;
@@ -79,6 +79,10 @@ public final class Autodiscovery extends AbstractConsumer {
         this.commandRepository = commandRepository;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getMessagingChannel() {
         return MESSAGING_CHANNEL;
@@ -96,52 +100,47 @@ public final class Autodiscovery extends AbstractConsumer {
         try {
             join(clazz, name, protocol, address, allowClones);
         } catch (RepositoryException ex) {
-            Logger.getLogger(Autodiscovery.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error(ex.getMessage());
         }
     }
 
     /**
-     * Creates a {@link EnvObjectLogic} with the specification in input.If a
+     * Creates an {@link EnvObjectLogic} with the specification in input. If an
      * {@link EnvObjectLogic} with the same protocol and address already exists
-     * it will exits with no changes.
+     * it will exit with no changes.
      *
-     * @param clazz The name of the Thing template to load (eg: Light)
-     * @param name The name of the Thing
-     * @param protocol The protocol which drives the Thing
-     * @param address The address to uniquely identify the Thing
-     * @param allowClones determines if can clone an existent template adding an
-     * ordinal number to its name, true by default
-     * @return The thing that is created
+     * @param clazz the name of the thing template to load (eg: Light)
+     * @param name the name of the thing
+     * @param protocol the protocol which drives the thing
+     * @param address the address to uniquely identify the thing
+     * @param allowClones determines if an existent template can be cloned by
+     * adding an ordinal number to its name, true by default
+     * @return the thing created
      * @throws com.freedomotic.exceptions.RepositoryException if it's not
-     * possible to retrieve the requested Thing information
+     * possible to retrieve the requested thing information
      */
     protected EnvObjectLogic join(String clazz, String name, String protocol, String address, boolean allowClones) throws RepositoryException {
         // Check if autodiscovery can be applied
         if (thingAlreadyExists(protocol, address)) {
-            LOG.log(Level.INFO, "A thing with protocol ''{0}'' and address ''{1}'' "
-                    + "already exists in the environment. "
-                    + "Autodiscovery exists without changes", new Object[]{protocol, address});
+            LOG.info("A thing with protocol ''{}'' and address ''{}'' already exists in the environment. Autodiscovery exits without changes", new Object[]{protocol, address});
             return null;
         }
 
         // If not allowed to clone an Thing
         if (!allowClones && thingAlreadyExists(name)) {
-            LOG.log(Level.INFO, "A thing with name ''{0}'' already exists in the environment. "
-                    + "Autodiscovery exists without changes because property "
-                    + "'autodiscovery.allow-clones' property is "
-                    + allowClones + " for the received command", name);
+            LOG.info("A thing with name ''{}'' already exists in the environment. Autodiscovery exits without changes because property 'autodiscovery.allow-clones' property is ''{}'' for the received command", new Object[]{name, allowClones});
             return null;
         }
 
         // Check if the requested Thing template is loaded
         ObjectPluginPlaceholder thingTemplate = (ObjectPluginPlaceholder) clientStorage.get(clazz);
         if (thingTemplate == null) {
-            LOG.log(Level.WARNING, "Autodiscovery error: doesn't exist an object class called ''{0}''", clazz);
+            LOG.warn("Autodiscovery error: doesn't exist an object class called ''{}''", clazz);
             return null;
         }
 
         // Start the new Thing creation
-        LOG.log(Level.WARNING, "Autodiscovery request for an object called ''{0}'' of type ''{1}''", new Object[]{name, clazz});
+        LOG.warn("Autodiscovery request for an object called ''{}'' of type ''{}''", new Object[]{name, clazz});
         File templateFile = thingTemplate.getTemplate();
         EnvObjectLogic loaded = thingsRepository.load(templateFile);
 
@@ -161,7 +160,7 @@ public final class Autodiscovery extends AbstractConsumer {
         loaded.getPojo().setActAs("");
         loaded.setRandomLocation();
         configureOptionalMapping(protocol, clazz, loaded);
-        LOG.log(Level.INFO, "Autodiscovery adds a thing called ''{0}'' of type ''{1}''",
+        LOG.info("Autodiscovery adds a thing called ''{}'' of type ''{}''",
                 new Object[]{loaded.getPojo().getName(), clazz});
         return loaded;
     }
@@ -176,11 +175,11 @@ public final class Autodiscovery extends AbstractConsumer {
      * The configuration specified in this tuple will be applied to the target
      * Thing.
      *
-     * @param protocol The Thing protocol, used to retrieve the corresponding
+     * @param protocol the thing protocol, used to retrieve the corresponding
      * plugin
-     * @param clazz The dot notation taxonomy used to identify the mapping that
+     * @param clazz the dot notation taxonomy used to identify the mapping that
      * should be applied (eg: EnvObject.ElectricDevice.Light)
-     * @param loaded The target thing
+     * @param loaded the target thing
      * @throws RuntimeException
      */
     private void configureOptionalMapping(String protocol, String clazz, EnvObjectLogic loaded) throws RuntimeException {

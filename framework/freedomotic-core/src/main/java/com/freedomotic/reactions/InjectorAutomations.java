@@ -24,7 +24,7 @@ import com.google.inject.Singleton;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public class InjectorAutomations extends AbstractModule {
 

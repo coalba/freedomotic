@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public interface ThingRepository extends Repository<EnvObjectLogic> {
 
@@ -38,7 +38,6 @@ public interface ThingRepository extends Repository<EnvObjectLogic> {
     public List<EnvObjectLogic> findByProtocol(String protocolName);
 
     //TODO: should return a single element, done this way for backward compatibility
-
     public List<EnvObjectLogic> findByAddress(String protocol, String address);
 
     //TODO: temporary for refactoring, should be removed

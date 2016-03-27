@@ -31,18 +31,18 @@ import com.freedomotic.things.EnvObjectLogic;
 import com.freedomotic.things.ThingFactory;
 import com.freedomotic.things.ThingRepository;
 import com.google.inject.Inject;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
 
 /**
  *
- * @author nicoletti
+ * @author Enrico Nicoletti
  */
 public class SynchManager implements BusConsumer {
 
-    private static final Logger LOG = Logger.getLogger(TopologyManager.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(TopologyManager.class.getName());
     public static final String LISTEN_CHANNEL = "app.event.sensor.object.behavior.change";
     private BusMessagesListener listener;
     private final BusService busService;
@@ -76,7 +76,7 @@ public class SynchManager implements BusConsumer {
                     try {
                         thing = thingFactory.create(synchThingRequest.getThing());
                     } catch (RepositoryException ex) {
-                        Logger.getLogger(SynchManager.class.getName()).log(Level.SEVERE, null, ex);
+                        LOG.error(ex.getMessage());
                     }
                     // A new thing was created in another instance
                     if (synchThingRequest.getProperty(SynchAction.KEY_SYNCH_ACTION)
@@ -91,7 +91,7 @@ public class SynchManager implements BusConsumer {
                 }
             }
         } catch (JMSException ex) {
-            LOG.log(Level.SEVERE, null, ex);
+            LOG.error(ex.getMessage());
         }
 
     }
@@ -104,7 +104,7 @@ public class SynchManager implements BusConsumer {
             if (value != null && !value.isEmpty()) {
                 Config conf = new Config();
                 conf.setProperty("value", value);
-                LOG.log(Level.CONFIG, "Synch thing {0} behavior {1} to {2} notified by {3}",
+                LOG.info("Synch thing {} behavior {} to {} notified by {}",
                         new Object[]{obj.getPojo().getName(), b.getName(), value});
                 obj.getBehavior(b.getName()).filterParams(conf, false);
             }
@@ -114,13 +114,11 @@ public class SynchManager implements BusConsumer {
         try {
             int locationX = Integer.parseInt(event.getProperty("object.location.x"));
             int locationY = Integer.parseInt(event.getProperty("object.location.y"));
-            LOG.log(Level.CONFIG, "Synch thing {0} location to {1},{2}",
+            LOG.info("Synch thing {} location to {},{}",
                     new Object[]{obj.getPojo().getName(), locationX, locationY});
             obj.synchLocation(locationX, locationY);
         } catch (NumberFormatException numberFormatException) {
-            LOG.log(Level.WARNING, "Synch thing location is not possible because notified location it's not a valid number");
+            LOG.warn("Synch thing location is not possible because notified location it's not a valid number");
         }
-
     }
-
 }

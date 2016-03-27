@@ -17,7 +17,6 @@
  * Freedomotic; see the file COPYING. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-
 package com.freedomotic.model.environment;
 
 import com.freedomotic.model.geometry.FreedomPolygon;
@@ -30,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 @XmlRootElement
 public class Zone

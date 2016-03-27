@@ -23,9 +23,10 @@ import java.util.EnumSet;
 
 /**
  *
- * @author matteo
+ * @author Matteo Mazzoni
  */
 public enum PluginStatus {
+
     LOADED,
     INITED,
     STOPPED,
@@ -35,7 +36,7 @@ public enum PluginStatus {
     STOPPING,
     INSTALLING,
     UNINSTALLING;
-    
+
     //eg: not allowed to start if it is already RUNNING
     private static final EnumSet<PluginStatus> allowedToStartStatuses = EnumSet.of(STOPPED, FAILED);
     //Currently unused
@@ -44,5 +45,5 @@ public enum PluginStatus {
     public static boolean isAllowedToStart(PluginStatus currentStatus) {
         return allowedToStartStatuses.contains(currentStatus);
     }
-    
+
 }

@@ -21,7 +21,7 @@ package com.freedomotic.exceptions;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public class DataUpgradeException extends Exception {
 

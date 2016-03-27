@@ -35,7 +35,7 @@ import com.google.inject.AbstractModule;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public class FreedomoticInjector extends AbstractModule {
 
@@ -53,6 +53,6 @@ public class FreedomoticInjector extends AbstractModule {
         install(new InjectorI18n());
         install(new InjectorSecurity());
         install(new InjectorSettings());
-        
+
     }
 }

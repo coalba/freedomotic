@@ -23,7 +23,7 @@ import java.util.Locale;
 
 /**
  *
- * @author Matteo Mazzoni <matteo@bestmazzo.it>
+ * @author Matteo Mazzoni
  */
 public class ComboLanguage implements Comparable {
 

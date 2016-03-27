@@ -1,7 +1,6 @@
 /**
  *
- * Copyright (c) 2009-2016 Freedomotic team
- * http://freedomotic.com
+ * Copyright (c) 2009-2016 Freedomotic team http://freedomotic.com
  *
  * This file is part of Freedomotic
  *
@@ -18,16 +17,11 @@
  * Freedomotic; see the file COPYING. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.freedomotic.nlp;
-
 
 /**
  *
- * @author nicoletti
+ * @author Enrico Nicoletti
  */
 public class DamerauLevenshtein {
 
@@ -35,7 +29,6 @@ public class DamerauLevenshtein {
     private String compTwo;
     private int[][] matrix;
     private Boolean calculated = false;
-
 
     public void setWordsToCompare(String a, String b) {
         calculated = false; //reset for a new calucation

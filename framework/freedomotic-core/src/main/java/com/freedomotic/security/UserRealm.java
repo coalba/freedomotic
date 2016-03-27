@@ -25,18 +25,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.shiro.authz.SimpleRole;
 import org.apache.shiro.realm.SimpleAccountRealm;
 
 /**
  *
- * @author matteo
+ * @author Matteo Mazzoni
  */
 public class UserRealm extends SimpleAccountRealm {
 
-    private final static Logger LOG = Logger.getLogger(UserRealm.class.getCanonicalName());
+    private final static Logger LOG = LoggerFactory.getLogger(UserRealm.class.getCanonicalName());
     public final static String USER_REALM_NAME = "com.freedomotic.security";
 
     public UserRealm() {
@@ -86,7 +86,7 @@ public class UserRealm extends SimpleAccountRealm {
     private boolean saveRoles(File file) throws IOException {
         SimpleRole[] ra = new SimpleRole[]{};
         ra = getRoles().values().toArray(ra);
-        LOG.log(Level.INFO, "Serializing roles to {0}", file);
+        LOG.info("Serializing roles to {}", file);
         FreedomXStream.toXML(ra, file);
         return true;
     }
@@ -104,7 +104,7 @@ public class UserRealm extends SimpleAccountRealm {
     private boolean saveUsers(File file) throws IOException {
         User[] ua = new User[]{};
         ua = getUsers().values().toArray(ua);
-        LOG.log(Level.INFO, "Serializing users to {0}", file);
+        LOG.info("Serializing users to {}", file);
         FreedomXStream.toXML(ua, file);
 
         return true;

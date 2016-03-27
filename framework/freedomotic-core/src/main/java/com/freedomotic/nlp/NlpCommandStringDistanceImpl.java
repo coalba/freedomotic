@@ -17,10 +17,6 @@
  * Freedomotic; see the file COPYING. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.freedomotic.nlp;
 
 import com.freedomotic.exceptions.NoResultsException;
@@ -30,19 +26,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
+import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
+import org.slf4j.Logger;
 
 /**
  * Computes Commands similarity ranking usin Damerau-Levenstrin string distance
  * algorithm
  *
  * @see Command
- * @author Enrico
+ * @author Enrico Nicoletti
  */
 public class NlpCommandStringDistanceImpl implements NlpCommand {
 
-    private static final Logger LOG = Logger.getLogger(NlpCommandStringDistanceImpl.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(NlpCommandStringDistanceImpl.class.getName());
     private List<Rank<Command>> ranking;
     private final CommandRepository commandsRepository;
 
@@ -68,7 +65,6 @@ public class NlpCommandStringDistanceImpl implements NlpCommand {
 //                System.out.println(r.getElement().getName() + " points " + r.getSimilarity());
 //            }
 //        }
-
         if (ranking.isEmpty()) {
             return Collections.unmodifiableList(ranking);
         } else {

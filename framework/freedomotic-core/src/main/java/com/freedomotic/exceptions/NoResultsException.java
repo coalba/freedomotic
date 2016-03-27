@@ -1,6 +1,7 @@
 /**
  *
- * Copyright (c) 2009-2016 Freedomotic team http://freedomotic.com
+ * Copyright (c) 2009-2016 Freedomotic team
+ * http://freedomotic.com
  *
  * This file is part of Freedomotic
  *
@@ -21,7 +22,7 @@ package com.freedomotic.exceptions;
 
 /**
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public class NoResultsException extends Exception {
 

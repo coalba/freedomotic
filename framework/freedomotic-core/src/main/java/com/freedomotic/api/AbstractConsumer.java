@@ -25,8 +25,8 @@ import com.freedomotic.bus.BusService;
 import com.freedomotic.exceptions.UnableToExecuteException;
 import com.freedomotic.reactions.Command;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
@@ -35,18 +35,18 @@ import javax.jms.ObjectMessage;
  * TODO: THIS CLASS IT'S NOT FINISHED IT NEEDS TO IMPLEMENT THE REPLY FEATURE
  * Convenience root class for all bus message consumers
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public abstract class AbstractConsumer implements BusConsumer {
 
-    private static final Logger LOG = Logger.getLogger(AbstractConsumer.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractConsumer.class.getName());
     private final BusMessagesListener listener;
     private final BusService busService;
     private boolean automaticReply;
 
     /**
      *
-     * @param c
+     * @param c the command received
      * @throws IOException
      * @throws UnableToExecuteException
      */
@@ -75,7 +75,7 @@ public abstract class AbstractConsumer implements BusConsumer {
 
             if (jmsObject instanceof Command) {
                 final Command command = (Command) jmsObject;
-                LOG.log(Level.CONFIG, "{0} receives command {1} with parametes '{''{'{2}'}''}'",
+                LOG.info("{} receives command {} with parametes '{''{'{}'}''}'",
                         new Object[]{
                             this.getClass().getCanonicalName(),
                             command.getName(),
@@ -93,7 +93,7 @@ public abstract class AbstractConsumer implements BusConsumer {
                 }
             }
         } catch (JMSException ex) {
-            LOG.log(Level.SEVERE, "Error while receiving a JMS message", ex);
+            LOG.error("Error while receiving a JMS message", ex);
         }
     }
 
@@ -109,13 +109,11 @@ public abstract class AbstractConsumer implements BusConsumer {
         return busService;
     }
 
-
     //public void reply(Command command) {
-        // sends back the command
+    // sends back the command
     //    final String defaultCorrelationID = "-1";
     //    getBusService().reply(command, lastDestination, defaultCorrelationID);
     //}
-
     private class ActuatorPerforms extends Thread {
 
         private final Command command;
@@ -132,15 +130,15 @@ public abstract class AbstractConsumer implements BusConsumer {
         @Override
         public void run() {
             try {
-                // a command is supposed executed if the plugin doesen't say the contrary
+                // a command is supposed executed if the plugin doesn't say the contrary
                 command.setExecuted(true);
                 onCommand(command);
             } catch (IOException ex) {
-                LOG.log(Level.SEVERE, null, ex);
+                LOG.error(ex.getLocalizedMessage());
                 command.setExecuted(false);
             } catch (UnableToExecuteException ex) {
                 command.setExecuted(false);
-                LOG.log(Level.INFO, "{0} failed to execute command {1}: {2}", new Object[]{getName(), command.getName(), ex.getMessage()});
+                LOG.info("{} failed to execute command {}: {}", new Object[]{getName(), command.getName(), ex.getMessage()});
             }
 
             // automatic-reply-to-command is used when the plugin executes the command in a

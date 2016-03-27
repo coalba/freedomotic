@@ -20,19 +20,20 @@
 package com.freedomotic.events;
 
 import com.freedomotic.api.EventTemplate;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * All purpose event. Use only if no more specific events are present in this
- * list. You can generate your own events extending the {@link EventTemplate}
- * class.
+ * General purpose event. Use only if no more specific events are present in
+ * this list. You can generate your own events extending the
+ * {@link EventTemplate} class.
  *
- * @author enrico
+ * @author Enrico Nicoletti
  */
 public class GenericEvent extends EventTemplate {
 
+    private static final Logger LOG = LoggerFactory.getLogger(GenericEvent.class.getName());
     private static final long serialVersionUID = 6029054631809171990L;
-
     private String destination = "app.event.sensor";
 
     /**
@@ -51,8 +52,9 @@ public class GenericEvent extends EventTemplate {
     }
 
     /**
-     *
-     * @return
+     * Gets the default channel.
+     * 
+     * @return the default channel
      */
     @Override
     public String getDefaultDestination() {
@@ -60,11 +62,11 @@ public class GenericEvent extends EventTemplate {
     }
 
     /**
-     *
-     * @param destination
+     * Sets the channel.
+     * 
+     * @param destination the channel to set
      */
     public void setDestination(String destination) {
         this.destination = destination;
     }
-    private static final Logger LOG = Logger.getLogger(GenericEvent.class.getName());
 }

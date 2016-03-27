@@ -21,7 +21,7 @@ package com.freedomotic.rules;
 
 /**
  *
- * @author nicoletti
+ * @author Enrico Nicoletti
  */
 public abstract class BinaryExpression implements Expression {
 

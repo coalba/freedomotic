@@ -19,16 +19,17 @@
  */
 package com.freedomotic.rules;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author nicoletti
+ * @author Enrico Nicoletti
  */
 public class GreaterThan extends BinaryExpression {
 
     private static final String OPERATOR = Statement.GREATER_THAN;
-    private static final Logger LOG = Logger.getLogger(GreaterThan.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(GreaterThan.class.getName());
 
     @Override
     public String getOperand() {
@@ -46,7 +47,7 @@ public class GreaterThan extends BinaryExpression {
             Integer intLeftValue = new Integer(getLeft());
             return intLeftValue > intRightValue;
         } catch (NumberFormatException nfe) {
-            LOG.warning(Statement.GREATER_THAN  + " operator can be applied only to integer values");
+            LOG.warn(Statement.GREATER_THAN + " operator can be applied only to integer values");
             return false;
         }
     }
